@@ -7,9 +7,7 @@ This is my online pharmacy management system created for both admin and customer
 def search_from_list(list,target,position):
 
     #iterate through the entire list
-    count=-1
-    for item in list:
-        count+=1
+    for count, item in enumerate(list):
 
         #if the target is in the list,returns True and the index number of the list containing the target 
         if item[position]==target:
@@ -37,6 +35,7 @@ def readfile(filename):
         
     #for every line in the file,remove the newlines and split them with : as the seperator and make them into a list and then append the list
     final_list=[(user.replace('\n','')).split(':') for user in file_content]
+    print(final_list)
 
     return final_list
 
@@ -58,7 +57,7 @@ def register(role):
     #if the file has not been created,just write the new users info into the newly created file
     if account_list==None:
         with open(file_name,'w') as file:
-            file.write(f'{username}:{password}')    
+            file.write(username+ ":" + password)    
 
     #if there are already existing users,check if there is any matching username and tell the user to enter a new name if required
     else:
@@ -156,7 +155,6 @@ def start_menu():
         print('2 - New User')
         print('3 - Registered User')
         role_choice=input('\n Please enter your choice:\n')
-        print(type(role_choice))
         print('\n'+role_choice+'\n')
         if not(role_choice=='1' or role_choice=='2' or role_choice=='3'):
             print('\nPlease input a correct number')
@@ -166,6 +164,13 @@ def start_menu():
     #returns back the choices of the users
     return int(role_choice)
 
+
+#function call to start the program
 role_choice=start_menu()
+
+#displays menu according to user's role
 menu(role_choice)
+
+
+
 
